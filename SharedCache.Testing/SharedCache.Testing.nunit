@@ -1,0 +1,10 @@
+﻿<NUnitProject>
+  <Settings activeconfig="Debug" />
+  <Config name="Debug" appbase="bin\Debug" configfile="SharedCache.WinServiceTestClient.exe.config" binpathtype="Auto">
+    <assembly path="SharedCache.Testing.dll" />
+  </Config>
+  <Config name="Release" binpathtype="Auto">
+    <assembly path=".\bin\Release\SharedCache.Testing.dll" />
+    <assembly path=".\bin\Release\SharedCache.Testing.dll" />
+  </Config>
+</NUnitProject>

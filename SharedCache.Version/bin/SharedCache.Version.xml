@@ -1,0 +1,266 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>SharedCache.Version</name>
+    </assembly>
+    <members>
+        <member name="T:SharedCache.Version.Version">
+            <summary>
+            Summary description for Service1
+            </summary>
+        </member>
+        <member name="M:SharedCache.Version.Version.GetVersion">
+            <summary>
+            Gets the version of the public available release.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="T:SharedCache.Version.Config">
+            <summary>
+            Summary description for ConfigHandler.
+            </summary>
+        </member>
+        <member name="M:SharedCache.Version.Config.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:SharedCache.Version.Config"/> class.
+            </summary>
+        </member>
+        <member name="M:SharedCache.Version.Config.GetStringValueFromConfigByKey(System.String)">
+            <summary>
+            Get the value based on the key from the app.config
+            </summary>
+            <param name="key"><see cref="T:System.String"/> Key-Name</param>
+            <returns>string value of a applied key</returns>
+        </member>
+        <member name="M:SharedCache.Version.Config.GetIntValueFromConfigByKey(System.String)">
+            <summary>
+            Get the value based on the key from the app.config
+            </summary>
+            <param name="key"><see cref="T:System.String"/> Key-Name</param>
+            <returns>int value of a applied key</returns>
+        </member>
+        <member name="M:SharedCache.Version.Config.GetDoubleValueFromConfigByKey(System.String)">
+            <summary>
+            Get the value based on the key from the app.config
+            </summary>
+            <param name="key"><see cref="T:System.String"/> Key-Name</param>
+            <returns>int value of a applied key</returns>
+        </member>
+        <member name="M:SharedCache.Version.Config.GetNumOfDefinedAppSettings">
+            <summary>
+            Gets the num of defined app settings.
+            </summary>
+            <returns>A <see cref="T:System.Int32"/> Object.</returns>
+        </member>
+        <member name="T:SharedCache.Version.Registration">
+            <summary>
+            Summary description for Registration
+            </summary>
+        </member>
+        <member name="M:SharedCache.Version.Registration.SetInstallRegistration(System.String,System.String,System.String,System.String,System.String,System.String,System.Boolean)">
+            <summary>
+            Register an installation on server environment
+            </summary>
+            <param name="key">internal key</param>
+            <param name="name">name of a person</param>
+            <param name="organization">name of an organisation</param>
+            <param name="email">an email address</param>
+            <param name="usage">how people are using shared cache</param>
+            <param name="info">how people heared about shared cache</param>
+            <param name="getUpdates">would like to receive updates</param>
+        </member>
+        <member name="T:SharedCache.XML.SerializedFormat">
+            <summary>
+            Serialization format types.
+            </summary>
+        </member>
+        <member name="F:SharedCache.XML.SerializedFormat.Binary">
+            <summary>
+            Binary serialization format.
+            </summary>
+        </member>
+        <member name="F:SharedCache.XML.SerializedFormat.Document">
+            <summary>
+            Document serialization format.
+            </summary>
+        </member>
+        <member name="T:SharedCache.XML.ObjectXMLSerializer`1">
+            <summary>
+            Facade to XML serialization and deserialization of strongly typed objects to/from an XML file.
+            
+            References: XML Serialization at http://samples.gotdotnet.com/:
+            http://samples.gotdotnet.com/QuickStart/howto/default.aspx?url=/quickstart/howto/doc/xmlserialization/rwobjfromxml.aspx
+            </summary>
+        </member>
+        <member name="M:SharedCache.XML.ObjectXMLSerializer`1.Load(System.String)">
+            <summary>
+            Loads an object from an XML file in Document format.
+            </summary>
+            <example>
+            <code>
+            serializableObject = ObjectXMLSerializer&lt;SerializableObject&gt;.Load(@"C:\XMLObjects.xml");
+            </code>
+            </example>
+            <param name="path">Path of the file to load the object from.</param>
+            <returns>Object loaded from an XML file in Document format.</returns>
+        </member>
+        <member name="M:SharedCache.XML.ObjectXMLSerializer`1.Load(System.String,SharedCache.XML.SerializedFormat)">
+            <summary>
+            Loads an object from an XML file using a specified serialized format.
+            </summary>
+            <example>
+            <code>
+            serializableObject = ObjectXMLSerializer&lt;SerializableObject&gt;.Load(@"C:\XMLObjects.xml", SerializedFormat.Binary);
+            </code>
+            </example>		
+            <param name="path">Path of the file to load the object from.</param>
+            <param name="serializedFormat">XML serialized format used to load the object.</param>
+            <returns>Object loaded from an XML file using the specified serialized format.</returns>
+        </member>
+        <member name="M:SharedCache.XML.ObjectXMLSerializer`1.Load(System.String,System.Type[])">
+            <summary>
+            Loads an object from an XML file in Document format, supplying extra data types to enable deserialization of custom types within the object.
+            </summary>
+            <example>
+            <code>
+            serializableObject = ObjectXMLSerializer&lt;SerializableObject&gt;.Load(@"C:\XMLObjects.xml", new Type[] { typeof(MyCustomType) });
+            </code>
+            </example>
+            <param name="path">Path of the file to load the object from.</param>
+            <param name="extraTypes">Extra data types to enable deserialization of custom types within the object.</param>
+            <returns>Object loaded from an XML file in Document format.</returns>
+        </member>
+        <member name="M:SharedCache.XML.ObjectXMLSerializer`1.Load(System.String,System.IO.IsolatedStorage.IsolatedStorageFile)">
+            <summary>
+            Loads an object from an XML file in Document format, located in a specified isolated storage area.
+            </summary>
+            <example>
+            <code>
+            serializableObject = ObjectXMLSerializer&lt;SerializableObject&gt;.Load("XMLObjects.xml", IsolatedStorageFile.GetUserStoreForAssembly());
+            </code>
+            </example>
+            <param name="fileName">Name of the file in the isolated storage area to load the object from.</param>
+            <param name="isolatedStorageDirectory">Isolated storage area directory containing the XML file to load the object from.</param>
+            <returns>Object loaded from an XML file in Document format located in a specified isolated storage area.</returns>
+        </member>
+        <member name="M:SharedCache.XML.ObjectXMLSerializer`1.Load(System.String,System.IO.IsolatedStorage.IsolatedStorageFile,SharedCache.XML.SerializedFormat)">
+            <summary>
+            Loads an object from an XML file located in a specified isolated storage area, using a specified serialized format.
+            </summary>
+            <example>
+            <code>
+            serializableObject = ObjectXMLSerializer&lt;SerializableObject&gt;.Load("XMLObjects.xml", IsolatedStorageFile.GetUserStoreForAssembly(), SerializedFormat.Binary);
+            </code>
+            </example>		
+            <param name="fileName">Name of the file in the isolated storage area to load the object from.</param>
+            <param name="isolatedStorageDirectory">Isolated storage area directory containing the XML file to load the object from.</param>
+            <param name="serializedFormat">XML serialized format used to load the object.</param>        
+            <returns>Object loaded from an XML file located in a specified isolated storage area, using a specified serialized format.</returns>
+        </member>
+        <member name="M:SharedCache.XML.ObjectXMLSerializer`1.Load(System.String,System.IO.IsolatedStorage.IsolatedStorageFile,System.Type[])">
+            <summary>
+            Loads an object from an XML file in Document format, located in a specified isolated storage area, and supplying extra data types to enable deserialization of custom types within the object.
+            </summary>
+            <example>
+            <code>
+            serializableObject = ObjectXMLSerializer&lt;SerializableObject&gt;.Load("XMLObjects.xml", IsolatedStorageFile.GetUserStoreForAssembly(), new Type[] { typeof(MyCustomType) });
+            </code>
+            </example>		
+            <param name="fileName">Name of the file in the isolated storage area to load the object from.</param>
+            <param name="isolatedStorageDirectory">Isolated storage area directory containing the XML file to load the object from.</param>
+            <param name="extraTypes">Extra data types to enable deserialization of custom types within the object.</param>
+            <returns>Object loaded from an XML file located in a specified isolated storage area, using a specified serialized format.</returns>
+        </member>
+        <member name="M:SharedCache.XML.ObjectXMLSerializer`1.Save(`0,System.String)">
+            <summary>
+            Saves an object to an XML file in Document format.
+            </summary>
+            <example>
+            <code>        
+            SerializableObject serializableObject = new SerializableObject();
+            
+            ObjectXMLSerializer&lt;SerializableObject&gt;.Save(serializableObject, @"C:\XMLObjects.xml");
+            </code>
+            </example>
+            <param name="serializableObject">Serializable object to be saved to file.</param>
+            <param name="path">Path of the file to save the object to.</param>
+        </member>
+        <member name="M:SharedCache.XML.ObjectXMLSerializer`1.Save(`0,System.String,SharedCache.XML.SerializedFormat)">
+            <summary>
+            Saves an object to an XML file using a specified serialized format.
+            </summary>
+            <example>
+            <code>
+            SerializableObject serializableObject = new SerializableObject();
+            
+            ObjectXMLSerializer&lt;SerializableObject&gt;.Save(serializableObject, @"C:\XMLObjects.xml", SerializedFormat.Binary);
+            </code>
+            </example>
+            <param name="serializableObject">Serializable object to be saved to file.</param>
+            <param name="path">Path of the file to save the object to.</param>
+            <param name="serializedFormat">XML serialized format used to save the object.</param>
+        </member>
+        <member name="M:SharedCache.XML.ObjectXMLSerializer`1.Save(`0,System.String,System.Type[])">
+            <summary>
+            Saves an object to an XML file in Document format, supplying extra data types to enable serialization of custom types within the object.
+            </summary>
+            <example>
+            <code>        
+            SerializableObject serializableObject = new SerializableObject();
+            
+            ObjectXMLSerializer&lt;SerializableObject&gt;.Save(serializableObject, @"C:\XMLObjects.xml", new Type[] { typeof(MyCustomType) });
+            </code>
+            </example>
+            <param name="serializableObject">Serializable object to be saved to file.</param>
+            <param name="path">Path of the file to save the object to.</param>
+            <param name="extraTypes">Extra data types to enable serialization of custom types within the object.</param>
+        </member>
+        <member name="M:SharedCache.XML.ObjectXMLSerializer`1.Save(`0,System.String,System.IO.IsolatedStorage.IsolatedStorageFile)">
+            <summary>
+            Saves an object to an XML file in Document format, located in a specified isolated storage area.
+            </summary>
+            <example>
+            <code>        
+            SerializableObject serializableObject = new SerializableObject();
+            
+            ObjectXMLSerializer&lt;SerializableObject&gt;.Save(serializableObject, "XMLObjects.xml", IsolatedStorageFile.GetUserStoreForAssembly());
+            </code>
+            </example>
+            <param name="serializableObject">Serializable object to be saved to file.</param>
+            <param name="fileName">Name of the file in the isolated storage area to save the object to.</param>
+            <param name="isolatedStorageDirectory">Isolated storage area directory containing the XML file to save the object to.</param>
+        </member>
+        <member name="M:SharedCache.XML.ObjectXMLSerializer`1.Save(`0,System.String,System.IO.IsolatedStorage.IsolatedStorageFile,SharedCache.XML.SerializedFormat)">
+            <summary>
+            Saves an object to an XML file located in a specified isolated storage area, using a specified serialized format.
+            </summary>
+            <example>
+            <code>        
+            SerializableObject serializableObject = new SerializableObject();
+            
+            ObjectXMLSerializer&lt;SerializableObject&gt;.Save(serializableObject, "XMLObjects.xml", IsolatedStorageFile.GetUserStoreForAssembly(), SerializedFormat.Binary);
+            </code>
+            </example>
+            <param name="serializableObject">Serializable object to be saved to file.</param>
+            <param name="fileName">Name of the file in the isolated storage area to save the object to.</param>
+            <param name="isolatedStorageDirectory">Isolated storage area directory containing the XML file to save the object to.</param>
+            <param name="serializedFormat">XML serialized format used to save the object.</param>        
+        </member>
+        <member name="M:SharedCache.XML.ObjectXMLSerializer`1.Save(`0,System.String,System.IO.IsolatedStorage.IsolatedStorageFile,System.Type[])">
+            <summary>
+            Saves an object to an XML file in Document format, located in a specified isolated storage area, and supplying extra data types to enable serialization of custom types within the object.
+            </summary>
+            <example>
+            <code>
+            SerializableObject serializableObject = new SerializableObject();
+            
+            ObjectXMLSerializer&lt;SerializableObject&gt;.Save(serializableObject, "XMLObjects.xml", IsolatedStorageFile.GetUserStoreForAssembly(), new Type[] { typeof(MyCustomType) });
+            </code>
+            </example>		
+            <param name="serializableObject">Serializable object to be saved to file.</param>
+            <param name="fileName">Name of the file in the isolated storage area to save the object to.</param>
+            <param name="isolatedStorageDirectory">Isolated storage area directory containing the XML file to save the object to.</param>
+            <param name="extraTypes">Extra data types to enable serialization of custom types within the object.</param>
+        </member>
+    </members>
+</doc>
