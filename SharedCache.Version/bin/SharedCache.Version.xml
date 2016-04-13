@@ -4,6 +4,23 @@
         <name>SharedCache.Version</name>
     </assembly>
     <members>
+        <member name="T:SharedCache.Version.Registration">
+            <summary>
+            Summary description for Registration
+            </summary>
+        </member>
+        <member name="M:SharedCache.Version.Registration.SetInstallRegistration(System.String,System.String,System.String,System.String,System.String,System.String,System.Boolean)">
+            <summary>
+            Register an installation on server environment
+            </summary>
+            <param name="key">internal key</param>
+            <param name="name">name of a person</param>
+            <param name="organization">name of an organisation</param>
+            <param name="email">an email address</param>
+            <param name="usage">how people are using shared cache</param>
+            <param name="info">how people heared about shared cache</param>
+            <param name="getUpdates">would like to receive updates</param>
+        </member>
         <member name="T:SharedCache.Version.Version">
             <summary>
             Summary description for Service1
@@ -51,23 +68,6 @@
             Gets the num of defined app settings.
             </summary>
             <returns>A <see cref="T:System.Int32"/> Object.</returns>
-        </member>
-        <member name="T:SharedCache.Version.Registration">
-            <summary>
-            Summary description for Registration
-            </summary>
-        </member>
-        <member name="M:SharedCache.Version.Registration.SetInstallRegistration(System.String,System.String,System.String,System.String,System.String,System.String,System.Boolean)">
-            <summary>
-            Register an installation on server environment
-            </summary>
-            <param name="key">internal key</param>
-            <param name="name">name of a person</param>
-            <param name="organization">name of an organisation</param>
-            <param name="email">an email address</param>
-            <param name="usage">how people are using shared cache</param>
-            <param name="info">how people heared about shared cache</param>
-            <param name="getUpdates">would like to receive updates</param>
         </member>
         <member name="T:SharedCache.XML.SerializedFormat">
             <summary>

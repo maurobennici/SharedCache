@@ -106,35 +106,6 @@ namespace SharedCache.Notify
 			if (proc.ExitCode != 0)
 				MessageBox.Show("Error executing", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
 		}
-
-
-		public static string VersionCheck()
-		{
-			version.Version wsVersion;
-			string result = string.Empty;
-			bool getWsInfo = false;
-			try
-			{
-				wsVersion = new version.Version();
-				wsVersion.Timeout = 5000;
-				wsVersion.Url = Config.GetStringValueFromConfigByKey(@"VersionUrl");
-				result = wsVersion.GetVersion();
-				getWsInfo = true;
-			}
-			catch (Exception ex)
-			{
-				COM.Handler.LogHandler.Error("Could not get online version number", ex);
-			}
-
-			if (!string.IsNullOrEmpty(result) && !result.Equals(Config.GetStringValueFromConfigByKey(@"SharedCacheVersionNumber")))
-			{
-				if (getWsInfo)
-				{
-					return result;
-				}
-			}
-			return result;
-		}
 	}
 
 	/// <summary>

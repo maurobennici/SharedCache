@@ -1,0 +1,13 @@
+C:\Users\Bennici\Source\Repos\SharedCache\SharedCache.WinServiceCommon\bin\Debug\SharedCache.WinServiceCommon.dll
+C:\Users\Bennici\Source\Repos\SharedCache\SharedCache.WinServiceCommon\bin\Debug\SharedCache.WinServiceCommon.pdb
+C:\Users\Bennici\Source\Repos\SharedCache\SharedCache.WinServiceCommon\bin\Debug\NLog.dll
+C:\Users\Bennici\Source\Repos\SharedCache\SharedCache.WinServiceCommon\bin\Debug\NLog.xml
+C:\Users\Bennici\Source\Repos\SharedCache\SharedCache.WinServiceCommon\obj\Debug\SharedCache.WinServiceCommon.dll
+C:\Users\Bennici\Source\Repos\SharedCache\SharedCache.WinServiceCommon\obj\Debug\SharedCache.WinServiceCommon.pdb
+C:\Users\Bennici\Source\Repos\SharedCache\SharedCache.WinServiceCommon\bin\Debug\Moq.dll
+C:\Users\Bennici\Source\Repos\SharedCache\SharedCache.WinServiceCommon\bin\Debug\nunit.framework.dll
+C:\Users\Bennici\Source\Repos\SharedCache\SharedCache.WinServiceCommon\bin\Debug\Moq.xml
+C:\Users\Bennici\Source\Repos\SharedCache\SharedCache.WinServiceCommon\bin\Debug\nunit.framework.xml
+C:\Users\Bennici\Source\Repos\SharedCache\SharedCache.WinServiceCommon\bin\Debug\NLog.config
+C:\Users\Bennici\Source\Repos\SharedCache\SharedCache.WinServiceCommon\bin\Debug\NLog.Web.dll
+C:\Users\Bennici\Source\Repos\SharedCache\SharedCache.WinServiceCommon\bin\Debug\NLog.Web.xml

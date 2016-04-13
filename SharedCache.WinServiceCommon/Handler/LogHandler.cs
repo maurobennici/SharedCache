@@ -77,7 +77,7 @@ namespace SharedCache.WinServiceCommon.Handler
 		{
 			
 			{
-				sync.DebugException(msg, ex);
+				sync.Debug(ex, msg);
 			}
 		}
 		/// <summary>
@@ -129,7 +129,7 @@ namespace SharedCache.WinServiceCommon.Handler
 		{
 			
 			{
-				sync.FatalException(msg, ex);
+				sync.Fatal(ex, msg);
 			}			
 		}
 		#endregion Sync
@@ -156,7 +156,7 @@ namespace SharedCache.WinServiceCommon.Handler
 		{
 			
 			{
-				error.DebugException(System.Environment.MachineName + ": " + msg, ex);
+				error.Debug(ex, System.Environment.MachineName + ": " + msg);
 			}
 		}
 		/// <summary>
@@ -181,7 +181,7 @@ namespace SharedCache.WinServiceCommon.Handler
 		{
 			
 			{
-				error.InfoException(System.Environment.MachineName + ": " + msg, ex);
+				error.Info(ex, System.Environment.MachineName + ": " + msg);
 			}
 		}
 		/// <summary>
@@ -204,7 +204,7 @@ namespace SharedCache.WinServiceCommon.Handler
 		[System.Diagnostics.DebuggerStepThrough]
 		public static void Fatal(string msg, Exception ex)
 		{
-			error.FatalException(System.Environment.MachineName + ": " + msg, ex);			
+			error.Fatal(ex, System.Environment.MachineName + ": " + msg);			
 		}
 		/// <summary>
 		/// Fatals the specified MSG.
@@ -226,7 +226,7 @@ namespace SharedCache.WinServiceCommon.Handler
 		{
 			
 			{
-				error.ErrorException(System.Environment.MachineName + "; " + msg, ex);
+				error.Error(ex, System.Environment.MachineName + "; " + msg);
 			}			
 		}
 		/// <summary>
@@ -266,7 +266,7 @@ namespace SharedCache.WinServiceCommon.Handler
 		[System.Diagnostics.DebuggerStepThrough]
 		public static void TrafficException(string msg, Exception ex)
 		{
-			traffic.LogException(LogLevel.Error, System.Environment.MachineName + ": " + msg.Replace('\n', '0'), ex);
+			traffic.Log(LogLevel.Error, ex, System.Environment.MachineName + ": " + msg.Replace('\n', '0'));
 		}
 		/// <summary>
 		/// Adding Traffic messages to log
@@ -327,7 +327,7 @@ namespace SharedCache.WinServiceCommon.Handler
 			{
 				SystemManagement.Cpu.LogCpuData();
 				SystemManagement.Memory.LogMemoryData();
-				memory.FatalException(msg, new Exception(msg));
+				memory.Fatal(new Exception(msg), msg);
 			}			
 		}
 
@@ -342,7 +342,7 @@ namespace SharedCache.WinServiceCommon.Handler
 		{
 			SystemManagement.Cpu.LogCpuData();
 			SystemManagement.Memory.LogMemoryData();
-			memory.FatalException(msg, ex);
+			memory.Fatal(ex, msg);
 		}
 
 		/// <summary>

@@ -262,27 +262,6 @@ namespace SharedCache.Notify
 				not.ContentClickable = false;
 				not.KeepVisibleOnMousOver = true;
 				not.ReShowOnMouseOver = true;
-
-				string result = Common.VersionCheck();
-				if (!string.IsNullOrEmpty(result))
-				{
-					string current = Config.GetStringValueFromConfigByKey(@"SharedCacheVersionNumber");
-					if(current.Equals(result))
-						not.Show("Version Check", "Latest version is used: " + result, 250, 15000, 500);					
-					else
-						not.Show("Version Check", "New version is available: " + result, 250, 15000, 500);
-				}
-
-				//COM.IndexusStatistic stat = COM.Provider.Cache.IndexusDistributionCache.SharedCache.GetStats();
-
-				//if (stat != null)
-				//{
-				//  not.Show("Shared Cache Status", stat.ToNotify(), 250, 30000, 500);
-				//}
-				//else
-				//{
-				//  not.Show("Info", "No Data Available - check if service is running", 500, 3000, 500);
-				//}
 			}			
 		}
 		
@@ -387,8 +366,7 @@ namespace SharedCache.Notify
 		private void toolStripMenuItem1_Click(object sender, EventArgs e)
 		{
 			
-			SharedCache.Registration.Register reg = new SharedCache.Registration.Register();
-			reg.Show();
+
 		}
 
 		public bool GetRegistryValue()

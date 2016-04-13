@@ -63,14 +63,6 @@ namespace SharedCache.Notify
 			this.installedVersionNumber.Text = Config.GetStringValueFromConfigByKey(@"SharedCacheVersionNumber");
 			this.VersionNumber.Text = latestVersionNumber;
 
-
-			string result = Common.VersionCheck();
-			if (!string.IsNullOrEmpty(result))
-			{
-				this.VersionNumber.Text = result;
-				this.ShowNoty("Version Check", "New version is available - " + result);
-			}
-			
 			this.Show();
 		}
 
