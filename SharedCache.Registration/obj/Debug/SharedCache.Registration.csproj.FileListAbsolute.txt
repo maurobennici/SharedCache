@@ -1,4 +1,0 @@
-C:\Users\Bennici\Source\Repos\SharedCache\SharedCache.Registration\obj\Debug\SharedCache.Registration.csprojResolveAssemblyReference.cache
-C:\Users\Bennici\Source\Repos\SharedCache\SharedCache.Registration\obj\Debug\SharedCache.Registration.Properties.Resources.resources
-C:\Users\Bennici\Source\Repos\SharedCache\SharedCache.Registration\obj\Debug\SharedCache.Registration.Register.resources
-C:\Users\Bennici\Source\Repos\SharedCache\SharedCache.Registration\obj\Debug\SharedCache.Registration.csproj.GenerateResource.Cache
