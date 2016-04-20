@@ -45,246 +45,229 @@
 // ************************************************************************* 
 
 using System;
+using System.Collections.Concurrent;
 using System.Collections.Generic;
+using System.Threading;
 
 
 namespace SharedCache.WinServiceCommon
 {
-	/// <summary>
-	/// Provides generic object cache/pool that based on
-	/// CLR garbage collector (GC) logic.
-	/// </summary>
-	/// <remarks>
-	/// You can extend Cache behaviour in distributed
-	/// environment by lifetime services setting
-	/// of Your classes.
-	/// </remarks>
-	[Serializable]
-	public sealed class Cache
-	{
-		#region Properties & private Variables
-		#region Property: CalculatedCacheSize
-		private long calculatedCacheSize;
+    /// <summary>
+    /// Provides generic object cache/pool that based on
+    /// CLR garbage collector (GC) logic.
+    /// </summary>
+    /// <remarks>
+    /// You can extend Cache behaviour in distributed
+    /// environment by lifetime services setting
+    /// of Your classes.
+    /// </remarks>
+    [Serializable]
+    public sealed class Cache
+    {
+        #region Properties & private Variables
+        #region Property: CalculatedCacheSize
+        private long _calculatedCacheSize;
 
-		/// <summary>
-		/// Gets/sets the CalculatedCacheSize
-		/// </summary>
-		public long CalculatedCacheSize
-		{
-			[System.Diagnostics.DebuggerStepThrough]
-			get { return this.calculatedCacheSize; }
-		}
-		#endregion
-		#region Singleton: CacheCleanup
-		private CacheCleanup cacheCleanup;
-		/// <summary>
-		/// Singleton for <see cref="CacheCleanup" />
-		/// </summary>
-		public CacheCleanup CacheCleanup
-		{
-			[System.Diagnostics.DebuggerStepThrough]
-			get { return this.cacheCleanup ?? (this.cacheCleanup = new CacheCleanup()); }
-		}
-		#endregion
-		/// <summary>
-		/// The Cache Dictionary which contains all data
-		/// </summary>
-		readonly Dictionary<string, byte[]> dict;
-		#endregion Properties & private Variables
+        /// <summary>
+        /// Gets/sets the CalculatedCacheSize
+        /// </summary>
+        public long CalculatedCacheSize
+        {
+            [System.Diagnostics.DebuggerStepThrough]
+            get { return Interlocked.Read(ref _calculatedCacheSize); }
+        }
+        #endregion
+        #region Singleton: CacheCleanup
+        private CacheCleanup _cacheCleanup;
+        /// <summary>
+        /// Singleton for <see cref="CacheCleanup" />
+        /// </summary>
+        public CacheCleanup CacheCleanup
+        {
+            [System.Diagnostics.DebuggerStepThrough]
+            get { return this._cacheCleanup ?? (this._cacheCleanup = new CacheCleanup()); }
+        }
+        #endregion
+        /// <summary>
+        /// The Cache Dictionary which contains all data
+        /// </summary>
+        readonly ConcurrentDictionary<string, byte[]> _dict;
+        #endregion Properties & private Variables
 
-		#region Constructors
-		/// <summary>
-		/// Creates an empty Cache.
-		/// </summary>
-		public Cache()
-		{
-			dict = new Dictionary<string, byte[]>();
-			this.calculatedCacheSize = 0;
-		}
-		/// <summary>
-		/// Creates a Cache with the specified initial size.
-		/// </summary>
-		/// <param name="initialSize">The approximate number of objects that the Cache can initially contain.</param>
-		public Cache(int initialSize) : this()
-		{
-			dict = new Dictionary<string, byte[]>(initialSize);			
-		}
-		#endregion Constructors
+        #region Constructors
+        /// <summary>
+        /// Creates an empty Cache.
+        /// </summary>
+        public Cache()
+        {
+            _dict = new ConcurrentDictionary<string, byte[]>();
+            Interlocked.Exchange(ref _calculatedCacheSize, 0);
+        }
+        /// <summary>
+        /// Creates a Cache with the specified initial size.
+        /// </summary>
+        /// <param name="initialSize">The approximate number of objects that the Cache can initially contain.</param>
+        public Cache(int initialSize) : this()
+        {
+            _dict = new ConcurrentDictionary<string, byte[]>(Environment.ProcessorCount * 2, initialSize);
+        }
+        #endregion Constructors
 
-		#region Methods
+        #region Methods
 
-		#region General Methods [Amount / Size / Clear / GetAllKeys]
+        #region General Methods [Amount / Size / Clear / GetAllKeys]
 
-		/// <summary>
-		/// returns the amount this instance contains.
-		/// </summary>
-		/// <returns></returns>
-		public long Amount()
-		{
-			long result = 0;
-			lock (dict)
-			{
-				result = dict.Count;
-			}
-			return result;
-		}
+        /// <summary>
+        /// returns the amount this instance contains.
+        /// </summary>
+        /// <returns></returns>
+        public int Amount()
+        {
+            return _dict.Count;
+        }
 
-		/// <summary>
-		/// calculates the actual size of this instance.
-		/// <remarks>
-		///	This is a very heavy operation, please consider not to use this to often then 
-		/// it locks the cache exclusivly which is very expensive!!!
-		/// </remarks>
-		/// </summary>
-		/// <returns>a <see cref="long"/> object with the actual Dictionary size</returns>
-		public long Size()
-		{
-			Dictionary<string, byte[]> di = null;
-			long size = 0;
+        /// <summary>
+        /// calculates the actual size of this instance.
+        /// <remarks>
+        ///	This is a very heavy operation, please consider not to use this to often then 
+        /// it locks the cache exclusivly which is very expensive!!!
+        /// </remarks>
+        /// </summary>
+        /// <returns>a <see cref="long"/> object with the actual Dictionary size</returns>
+        public long Size()
+        {
+            Dictionary<string, byte[]> di;
+            long size = 0;
 
-			// consider, this is very expensive!!
-			lock (dict)
-			{
-				di = new Dictionary<string, byte[]>(dict);
-			}
-			foreach (KeyValuePair<string, byte[]> de in di)
-			{
-				size += de.Value.Length;
-			}
-			return size;
-		}
+            // consider, this is very expensive!!
+            lock (_dict)
+            {
+                di = new Dictionary<string, byte[]>(_dict);
+            }
+            foreach (KeyValuePair<string, byte[]> de in di)
+            {
+                size += de.Value.Length;
+            }
+            return size;
+        }
 
-		/// <summary>
-		/// Retrive all key's
-		/// </summary>
-		/// <returns>returns a list with all key's as a <see cref="string"/> objects.</returns>
-		public List<string> GetAllKeys()
-		{
-			Dictionary<string, byte[]> hd = null;
-			lock (dict)
-			{
-				hd = new Dictionary<string, byte[]>(dict);
-			}
-			return new List<string>(hd.Keys);
-		}
-		#endregion General Methods [Amount / Size / Clear / GetAllKeys]
+        /// <summary>
+        /// Retrive all key's
+        /// </summary>
+        /// <returns>returns a list with all key's as a <see cref="string"/> objects.</returns>
+        public List<string> GetAllKeys()
+        {
+            Dictionary<string, byte[]> hd;
+            lock (_dict)
+            {
+                hd = new Dictionary<string, byte[]>(_dict);
+            }
+            return new List<string>(hd.Keys);
+        }
+        #endregion General Methods [Amount / Size / Clear / GetAllKeys]
 
-		#region Add / Insert Methods
-		/// <summary>
-		/// Adds an object that identified by the provided key to the Cache.
-		/// if the key is already available it will replace it.
-		/// </summary>
-		/// <param name="key">The Object to use as the key of the object to add.</param>
-		/// <param name="value">The Object to add. </param>
-		public void Add(string key, byte[] value)
-		{
-			try
-			{
-				lock (dict)
-				{
-					dict[key] = value;
-					this.calculatedCacheSize += value.Length;
-				}
-			}
-			catch (Exception ex)
-			{
-				Handler.LogHandler.Force(@"Add Failed - " + ex.Message);
-			}
-		}
+        #region Add / Insert Methods
+        /// <summary>
+        /// Adds an object that identified by the provided key to the Cache.
+        /// if the key is already available it will replace it.
+        /// </summary>
+        /// <param name="key">The Object to use as the key of the object to add.</param>
+        /// <param name="value">The Object to add. </param>
+        public void Add(string key, byte[] value)
+        {
+            try
+            {
+                _dict[key] = value;
+                Interlocked.Add(ref _calculatedCacheSize, value.Length);
+            }
+            catch (Exception ex)
+            {
+                Handler.LogHandler.Force(@"Add Failed - " + ex.Message);
+            }
+        }
 
-		/// <summary>
-		/// Adds the specified KeyValuePair
-		/// </summary>
-		/// <param name="kpv">The KPV. A <see cref="T:System.Collections.Generic.KeyValuePair&lt;System.String,System.Object&gt;"/> Object.</param>
-		public void Add(KeyValuePair<string, byte[]> kpv)
-		{
-			this.Add(kpv.Key, kpv.Value);
-		}
+        /// <summary>
+        /// Adds the specified KeyValuePair
+        /// </summary>
+        /// <param name="kpv">The KPV. A <see cref="T:System.Collections.Generic.KeyValuePair&lt;System.String,System.Object&gt;"/> Object.</param>
+        public void Add(KeyValuePair<string, byte[]> kpv)
+        {
+            Add(kpv.Key, kpv.Value);
+        }
 
-		/// <summary>
-		/// Inserts the specified key.
-		/// </summary>
-		/// <param name="key">The key. A <see cref="T:System.String"/> Object.</param>
-		/// <param name="value">The value. A <see cref="T:System.Object"/> Object.</param>
-		public void Insert(string key, byte[] value)
-		{
-			lock (dict)
-			{
-				dict.Add(key, value);
-				this.calculatedCacheSize += value.Length;
-			}
-		}
-		#endregion Add / Insert Methods
+        /// <summary>
+        /// Inserts the specified key.
+        /// </summary>
+        /// <param name="key">The key. A <see cref="T:System.String"/> Object.</param>
+        /// <param name="value">The value. A <see cref="T:System.Object"/> Object.</param>
+        public void Insert(string key, byte[] value)
+        {
+            _dict.TryAdd(key, value);
+            Interlocked.Add(ref _calculatedCacheSize, value.Length);
+        }
+        #endregion Add / Insert Methods
 
-		#region Retrive Method
-		/// <summary>
-		/// Gets the specified key.
-		/// </summary>
-		/// <param name="key">The key.</param>
-		/// <returns>a <see cref="object"/> object.</returns>
-		public byte[] Get(string key)
-		{
-			byte[] o = null;
-			try
-			{
-				lock (dict)
-				{
-					if (dict.ContainsKey(key))
-					{
-						o = dict[key];
-					}
-					else
-						o = null;
-				}
-			}
-			catch (Exception ex)
-			{
-				Handler.LogHandler.Info(@"Get Failed!", ex);
-			}
-			return o;
-		}
-		#endregion Retrive Methods
+        #region Retrive Method
+        /// <summary>
+        /// Gets the specified key.
+        /// </summary>
+        /// <param name="key">The key.</param>
+        /// <returns>a <see cref="object"/> object.</returns>
+        public byte[] Get(string key)
+        {
+            byte[] o = null;
+            try
+            {
+                if (_dict.ContainsKey(key))
+                {
+                    o = _dict[key];
+                }
+            }
+            catch (Exception ex)
+            {
+                Handler.LogHandler.Info(@"Get Failed!", ex);
+            }
+            return o;
+        }
+        #endregion Retrive Methods
 
-		#region Remove / Clear Methods
-		/// <summary>
-		/// Removes the object that identified by the specified key from the Cache.
-		/// </summary>
-		/// <param name="key">The key of the object to remove.</param>
-		public void Remove(string key)
-		{
-			try
-			{
-				lock (dict)
-				{
-					if (dict.ContainsKey(key))
-					{
-						this.calculatedCacheSize -= dict[key].Length;
-						dict.Remove(key);
-					}
-				}
-				GC.WaitForPendingFinalizers();
-			}
-			catch (Exception ex)
-			{
-				Handler.LogHandler.Info(@"Remove failed!", ex);
-			}
-		}
+        #region Remove / Clear Methods
+        /// <summary>
+        /// Removes the object that identified by the specified key from the Cache.
+        /// </summary>
+        /// <param name="key">The key of the object to remove.</param>
+        public void Remove(string key)
+        {
+            try
+            {
+                if (_dict.ContainsKey(key))
+                {
+                    Interlocked.Add(ref _calculatedCacheSize, _dict[key].Length);
+                    byte[] f;
+                    _dict.TryRemove(key, out f);
+                }
 
-		/// <summary>
-		/// Removes all objects from the Cache.
-		/// </summary>
-		public void Clear()
-		{
-			lock (dict)
-			{
-				dict.Clear();
-				this.calculatedCacheSize = 0;
-			}
-			// ISSUE: Not sure if this has to be here
-			GC.Collect();
-		}
-		#endregion Remove Methods
+                GC.WaitForPendingFinalizers();
+            }
+            catch (Exception ex)
+            {
+                Handler.LogHandler.Info(@"Remove failed!", ex);
+            }
+        }
 
-		#endregion Methods
-	}
+        /// <summary>
+        /// Removes all objects from the Cache.
+        /// </summary>
+        public void Clear()
+        {
+            _dict.Clear();
+            Interlocked.Exchange(ref _calculatedCacheSize, 0);
+
+            // ISSUE: Not sure if this has to be here
+            GC.Collect();
+        }
+        #endregion Remove Methods
+
+        #endregion Methods
+    }
 }

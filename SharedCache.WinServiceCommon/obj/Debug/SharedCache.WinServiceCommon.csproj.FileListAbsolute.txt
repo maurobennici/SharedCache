@@ -11,3 +11,4 @@ C:\Users\Bennici\Source\Repos\SharedCache\SharedCache.WinServiceCommon\bin\Debug
 C:\Users\Bennici\Source\Repos\SharedCache\SharedCache.WinServiceCommon\bin\Debug\NLog.config
 C:\Users\Bennici\Source\Repos\SharedCache\SharedCache.WinServiceCommon\bin\Debug\NLog.Web.dll
 C:\Users\Bennici\Source\Repos\SharedCache\SharedCache.WinServiceCommon\bin\Debug\NLog.Web.xml
+C:\Users\Bennici\Source\Repos\SharedCache\SharedCache.WinServiceCommon\obj\Debug\SharedCache.WinServiceCommon.csprojResolveAssemblyReference.cache
