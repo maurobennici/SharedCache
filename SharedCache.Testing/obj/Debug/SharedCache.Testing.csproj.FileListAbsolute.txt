@@ -1,6 +1,6 @@
-C:\Users\Bennici\Source\Repos\SharedCache\SharedCache.Testing\obj\Debug\SharedCache.Testing.csprojResolveAssemblyReference.cache
-C:\Users\Bennici\Source\Repos\SharedCache\SharedCache.Testing\bin\Debug\Data\Reporting.xml
 C:\Users\Bennici\Source\Repos\SharedCache\SharedCache.Testing\bin\Debug\SharedCache.WinServiceTestClient.exe.config
+C:\Users\Bennici\Source\Repos\SharedCache\SharedCache.Testing\bin\Debug\Data\Reporting.xml
+C:\Users\Bennici\Source\Repos\SharedCache\SharedCache.Testing\bin\Debug\NLog.config
 C:\Users\Bennici\Source\Repos\SharedCache\SharedCache.Testing\bin\Debug\Data\Country.xml
 C:\Users\Bennici\Source\Repos\SharedCache\SharedCache.Testing\bin\Debug\Data\Region.xml
 C:\Users\Bennici\Source\Repos\SharedCache\SharedCache.Testing\bin\Debug\job_install.bat
@@ -12,7 +12,10 @@ C:\Users\Bennici\Source\Repos\SharedCache\SharedCache.Testing\bin\Debug\singleIn
 C:\Users\Bennici\Source\Repos\SharedCache\SharedCache.Testing\bin\Debug\SharedCache.Testing.dll.config
 C:\Users\Bennici\Source\Repos\SharedCache\SharedCache.Testing\bin\Debug\SharedCache.Testing.dll
 C:\Users\Bennici\Source\Repos\SharedCache\SharedCache.Testing\bin\Debug\SharedCache.Testing.pdb
+C:\Users\Bennici\Source\Repos\SharedCache\SharedCache.Testing\bin\Debug\Castle.Core.dll
 C:\Users\Bennici\Source\Repos\SharedCache\SharedCache.Testing\bin\Debug\Moq.dll
+C:\Users\Bennici\Source\Repos\SharedCache\SharedCache.Testing\bin\Debug\NLog.dll
+C:\Users\Bennici\Source\Repos\SharedCache\SharedCache.Testing\bin\Debug\NLog.Web.dll
 C:\Users\Bennici\Source\Repos\SharedCache\SharedCache.Testing\bin\Debug\nunit.framework.dll
 C:\Users\Bennici\Source\Repos\SharedCache\SharedCache.Testing\bin\Debug\SharedCache.WinService.exe
 C:\Users\Bennici\Source\Repos\SharedCache\SharedCache.Testing\bin\Debug\SharedCache.WinServiceCommon.dll
@@ -20,12 +23,12 @@ C:\Users\Bennici\Source\Repos\SharedCache\SharedCache.Testing\bin\Debug\SharedCa
 C:\Users\Bennici\Source\Repos\SharedCache\SharedCache.Testing\bin\Debug\SharedCache.WinServiceCommon.pdb
 C:\Users\Bennici\Source\Repos\SharedCache\SharedCache.Testing\bin\Debug\SharedCache.WinServiceTestClient.pdb
 C:\Users\Bennici\Source\Repos\SharedCache\SharedCache.Testing\bin\Debug\SharedCache.WinService.pdb
+C:\Users\Bennici\Source\Repos\SharedCache\SharedCache.Testing\bin\Debug\SharedCache.WinService.exe.config
+C:\Users\Bennici\Source\Repos\SharedCache\SharedCache.Testing\bin\Debug\Castle.Core.xml
 C:\Users\Bennici\Source\Repos\SharedCache\SharedCache.Testing\bin\Debug\Moq.xml
+C:\Users\Bennici\Source\Repos\SharedCache\SharedCache.Testing\bin\Debug\NLog.xml
+C:\Users\Bennici\Source\Repos\SharedCache\SharedCache.Testing\bin\Debug\NLog.Web.xml
 C:\Users\Bennici\Source\Repos\SharedCache\SharedCache.Testing\bin\Debug\nunit.framework.xml
+C:\Users\Bennici\Source\Repos\SharedCache\SharedCache.Testing\obj\Debug\SharedCache.Testing.csprojResolveAssemblyReference.cache
 C:\Users\Bennici\Source\Repos\SharedCache\SharedCache.Testing\obj\Debug\SharedCache.Testing.dll
 C:\Users\Bennici\Source\Repos\SharedCache\SharedCache.Testing\obj\Debug\SharedCache.Testing.pdb
-C:\Users\Bennici\Source\Repos\SharedCache\SharedCache.Testing\bin\Debug\NLog.dll
-C:\Users\Bennici\Source\Repos\SharedCache\SharedCache.Testing\bin\Debug\NLog.xml
-C:\Users\Bennici\Source\Repos\SharedCache\SharedCache.Testing\bin\Debug\NLog.config
-C:\Users\Bennici\Source\Repos\SharedCache\SharedCache.Testing\bin\Debug\NLog.Web.dll
-C:\Users\Bennici\Source\Repos\SharedCache\SharedCache.Testing\bin\Debug\NLog.Web.xml
